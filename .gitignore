@@ -1,0 +1,13 @@
+# Knowledge graph (graphify)
+#
+# One graph, at graphify-out/. Only GRAPH_REPORT.md is committed - it is what
+# humans and later agents read. graph.json, graph.html, manifest.json,
+# cost.json, the AST cache and .graphify_analysis.json are regenerable, large,
+# and rewritten in full on every run. Rebuild them with scripts/graph.ps1.
+#
+# .graphify_root is ignored too: it records an absolute path from the machine
+# that built the graph, so committing it breaks every other clone.
+graphify-out/**
+!graphify-out/
+!graphify-out/GRAPH_REPORT.md
+.graphify_root

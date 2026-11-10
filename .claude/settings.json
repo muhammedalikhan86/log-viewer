@@ -1,0 +1,85 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Bash(*ls*)",
+      "Bash(*cat*)",
+      "Bash(*cd*)",
+      "Bash(*mkdir*)",
+      "Bash(*mv*)",
+      "Bash(*cp*)",
+      "Bash(*echo*)",
+      "Bash(*curl * http://127.0.0.1*)",
+      "Bash(*curl * http://localhost*)",
+      "Bash(*git log*)",
+      "Bash(*git status*)",
+      "Bash(*git diff*)",
+      "Bash(*git add*)",
+      "Bash(*git commit*)",
+      "Bash(*git branch*)",
+      "Bash(*npm*)",
+      "Bash(*npx*)",
+      "Bash(*node*)",
+      "Bash(*ng *)",
+      "Bash(*dotnet*)",
+      "Bash(*sqlcmd*)"
+    ],
+    "deny": [
+      "Bash(*git push --force*)",
+      "Bash(*git push -f *)",
+      "Bash(*git reset --hard *)",
+      "Bash(*git stash*)",
+      "Bash(*git checkout*)",
+      "Bash(*git switch -c*)",
+      "Bash(*git switch -C*)",
+      "Bash(*git switch --create*)",
+      "Bash(*git switch --force-create*)",
+      "Bash(*rm -rf *)"
+    ],
+    "defaultMode": "auto",
+    "additionalDirectories": []
+  },
+  "effortLevel": "high",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          { "type": "command", "command": "bash \"C:/Users/muhammedali.khan/.claude/hooks/allow-claude-config-read.sh\"" },
+          { "type": "command", "command": "bash \"C:/Users/muhammedali.khan/.claude/hooks/db-guard.sh\"" }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell|Monitor",
+        "hooks": [
+          { "type": "command", "command": "bash \"C:/Users/muhammedali.khan/.claude/hooks/shaw-library-guard.sh\"" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command", "command": "bash \"C:/Users/muhammedali.khan/.claude/hooks/loop-detection.sh\"" },
+          { "type": "command", "command": "bash \"C:/Users/muhammedali.khan/.claude/hooks/auto-verify-fix.sh\"" }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          { "type": "command", "command": "bash \"C:/Users/muhammedali.khan/.claude/hooks/pre-compact-snapshot.sh\"" }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          { "type": "command", "command": "bash \"C:/Users/muhammedali.khan/.claude/hooks/post-compact-restore.sh\"" }
+        ]
+      }
+    ]
+  }
+}
